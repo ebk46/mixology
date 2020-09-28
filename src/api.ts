@@ -22,14 +22,14 @@ export const searchByDrinkName = async (drinkName: string): Promise<SearchDrinks
 };
 
 // Get a list of ingredients based on search term
-export const searchByIngredientName = async (ingredientNames: string[]): Promise<SearchIngredientResult> => {
+export const searchByIngredientNames = async (ingredientNames: string[]): Promise<SearchIngredientResult> => {
   const query = `i=${ingredientNames.join(',')}`;
   const res = await fetch(`${filterUrl}${query}`);
 
   if (res.status === 200) {
     return res.json().then(data => data as SearchIngredientResult);
   } else {
-    throw new Error(`Failed searchByIngredientName: Status ${res.status}`);
+    throw new Error(`Failed searchByIngredientNames: Status ${res.status}`);
   }
 };
 
@@ -57,12 +57,12 @@ export const getPopularDrinks = async (): Promise<SearchDrinksResult> => {
 };
 
 // Get the full list of ingredients
-export const getIngredients = async (): Promise<ListIngredientResult> => {
+export const getFullIngredientsList = async (): Promise<ListIngredientResult> => {
   const res = await fetch(`${listUrl}i=list`);
 
   if (res.status === 200) {
     return res.json().then(data => data as ListIngredientResult);
   } else {
-    throw new Error(`Failed getIngredients: Status ${res.status}`);
+    throw new Error(`Failed getFullIngredientsList: Status ${res.status}`);
   }
 }
